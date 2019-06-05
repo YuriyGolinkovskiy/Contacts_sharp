@@ -15,7 +15,7 @@ namespace server_V1
     class ClientObject
     {
         public TcpClient client;
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\visual studio\Projects\ConsoleApplication6\server_V1\Database.mdf;Integrated Security=True";
+        string connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={Environment.CurrentDirectory}\\Database.mdf;Integrated Security=True";
         NetworkStream stream = null;
         SqlDataReader sqlReader;
         SqlConnection sqlConnecton;
