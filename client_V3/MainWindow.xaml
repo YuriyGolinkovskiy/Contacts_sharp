@@ -1,0 +1,13 @@
+﻿<Window x:Class="client_V3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:client_V3"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded" Closed="Window_Closed">
+    <Grid>
+        <Button x:Name="register" Content="Register" HorizontalAlignment="Left" Height="50" Margin="85,55,0,0" VerticalAlignment="Top" Width="150" Click="register_Click"/>
+        <Button x:Name="login" Content="Login" HorizontalAlignment="Left" Height="50" Margin="295,55,0,0" VerticalAlignment="Top" Width="180" Click="login_Click"/>
+    </Grid>
+</Window>

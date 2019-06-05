@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "server_V1", "server_V1\server_V1.csproj", "{FD5DE60B-B61A-4E72-9C8F-095D082D1D2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client_V3", "client_V3\client_V3.csproj", "{6CEB0558-F219-4672-B9A5-5EBC6E53A13F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization", "Serialization\Serialization.csproj", "{FD9803FB-C0B4-43AB-8875-75AF40AA104A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD5DE60B-B61A-4E72-9C8F-095D082D1D2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD5DE60B-B61A-4E72-9C8F-095D082D1D2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD5DE60B-B61A-4E72-9C8F-095D082D1D2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD5DE60B-B61A-4E72-9C8F-095D082D1D2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CEB0558-F219-4672-B9A5-5EBC6E53A13F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CEB0558-F219-4672-B9A5-5EBC6E53A13F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CEB0558-F219-4672-B9A5-5EBC6E53A13F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CEB0558-F219-4672-B9A5-5EBC6E53A13F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD9803FB-C0B4-43AB-8875-75AF40AA104A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD9803FB-C0B4-43AB-8875-75AF40AA104A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD9803FB-C0B4-43AB-8875-75AF40AA104A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD9803FB-C0B4-43AB-8875-75AF40AA104A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
