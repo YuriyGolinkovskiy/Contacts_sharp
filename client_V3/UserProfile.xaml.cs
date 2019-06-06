@@ -26,7 +26,7 @@ namespace client_V3
         List<List<object>> friendsList = null;
         Methods addToFriend = new Methods(Command.AddToFriend);
         Methods delFromFriend = new Methods(Command.DelFromFriend);
-        Methods getFriendList = new Methods(Command.GetFriendList);
+        
         IFormatter formatter = new BinaryFormatter();
         public UserProfile()
         {
@@ -34,10 +34,12 @@ namespace client_V3
         }
         public void GetFriends()
         {
+            Methods getFriendList = new Methods(Command.GetFriendList);
             getFriendList.idUser = Convert.ToInt32(Login.userData[0]);
             formatter.Serialize(MainWindow.stream, getFriendList);
             getFriendList = (Methods)formatter.Deserialize(MainWindow.stream);
             friendsList = getFriendList.GetFriends();
+            listBox1.ItemsSource = friendsList;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -47,7 +49,6 @@ namespace client_V3
             list = gul.GetUsersList();
 
             GetFriends();
-            listBox1.ItemsSource = friendsList;
             
             var n = 0;
             foreach (var item in list)
@@ -91,7 +92,7 @@ namespace client_V3
             addToFriend = (Methods)formatter.Deserialize(MainWindow.stream);
             MessageBox.Show("Добавлен в контакты");
             GetFriends();
-            listBox1.ItemsSource = friendsList;
+            
 
         }
 
@@ -103,7 +104,7 @@ namespace client_V3
             delFromFriend = (Methods)formatter.Deserialize(MainWindow.stream);
             MessageBox.Show("Удален из контактов");
             GetFriends();
-            listBox1.ItemsSource = friendsList;
+            
         } 
     }
 }
