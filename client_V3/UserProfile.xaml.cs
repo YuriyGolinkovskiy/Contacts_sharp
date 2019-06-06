@@ -23,18 +23,32 @@ namespace client_V3
     public partial class UserProfile : Window
     {
         List<List<object>> list = null;
+        List<List<object>> friendsList = null;
+        Methods addToFriend = new Methods(Command.AddToFriend);
+        Methods delFromFriend = new Methods(Command.DelFromFriend);
+        Methods getFriendList = new Methods(Command.GetFriendList);
+        IFormatter formatter = new BinaryFormatter();
         public UserProfile()
         {
             InitializeComponent();
         }
-        
+        public void GetFriends()
+        {
+            getFriendList.idUser = Convert.ToInt32(Login.userData[0]);
+            formatter.Serialize(MainWindow.stream, getFriendList);
+            getFriendList = (Methods)formatter.Deserialize(MainWindow.stream);
+            friendsList = getFriendList.GetFriends();
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Methods gul = new Methods(Command.GetUsersList);
-            IFormatter formatter = new BinaryFormatter();
             formatter.Serialize(MainWindow.stream, gul);
             gul = (Methods)formatter.Deserialize(MainWindow.stream);
             list = gul.GetUsersList();
+
+            GetFriends();
+            listBox1.ItemsSource = friendsList;
+            
             var n = 0;
             foreach (var item in list)
             {
@@ -46,6 +60,7 @@ namespace client_V3
                 n++;
             }
             listBox.ItemsSource = list;
+            
             name.Content = Login.userData[3];
             surname.Content = Login.userData[4];
             phone.Content = Login.userData[5];
@@ -71,21 +86,24 @@ namespace client_V3
         private void checkBox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox btn = (CheckBox)sender;
-            Methods addFriend = new Methods(Command.AddToFriend);
-            addFriend.AddToFriend(Convert.ToInt32(Login.userData[0]),Convert.ToInt32(btn.Uid));
-            IFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(MainWindow.stream, addFriend);
-            addFriend = (Methods)formatter.Deserialize(MainWindow.stream);
-            if (addFriend.status)
-                MessageBox.Show("Добавлен в друзья");
+            addToFriend.AddToFriend(Convert.ToInt32(Login.userData[0]),Convert.ToInt32(btn.Uid));
+            formatter.Serialize(MainWindow.stream, addToFriend);
+            addToFriend = (Methods)formatter.Deserialize(MainWindow.stream);
+            MessageBox.Show("Добавлен в контакты");
+            GetFriends();
+            listBox1.ItemsSource = friendsList;
 
         }
 
         private void checkBox_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox btn = (CheckBox)sender;
-            btn.Content = "Friend";
-            MessageBox.Show(btn.Uid);
+            delFromFriend.AddToFriend(Convert.ToInt32(Login.userData[0]), Convert.ToInt32(btn.Uid));
+            formatter.Serialize(MainWindow.stream, delFromFriend);
+            delFromFriend = (Methods)formatter.Deserialize(MainWindow.stream);
+            MessageBox.Show("Удален из контактов");
+            GetFriends();
+            listBox1.ItemsSource = friendsList;
         } 
     }
 }

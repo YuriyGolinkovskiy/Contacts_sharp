@@ -12,6 +12,8 @@ namespace Serialization
         Registration,
         GetUsersList,
         AddToFriend,
+        DelFromFriend,
+        GetFriendList,
         SendMessage,
         LoadImage,
     }

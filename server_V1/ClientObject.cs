@@ -15,7 +15,8 @@ namespace server_V1
     class ClientObject
     {
         public TcpClient client;
-        string connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={Environment.CurrentDirectory}\\Database.mdf;Integrated Security=True";
+        //string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="+Environment.CurrentDirectory+@"Database.mdf;Integrated Security=True";
+        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\visual studio\Projects\ConsoleApplication6\server_V1\Database.mdf;Integrated Security=True";
         NetworkStream stream = null;
         SqlDataReader sqlReader;
         SqlConnection sqlConnecton;
@@ -182,7 +183,6 @@ namespace server_V1
         }
         public async void AddToFriend(Methods metod)
         {
-            metod.status = false;
             sqlConnecton = new SqlConnection(connectionString);
             await sqlConnecton.OpenAsync();
             command = new SqlCommand("INSERT INTO [Friends] (id_friend, id_user)VALUES(@id_friend, @id_user)", sqlConnecton);
@@ -192,7 +192,6 @@ namespace server_V1
                 command.Parameters.AddWithValue("id_friend", metod.idFriend);
                 command.Parameters.AddWithValue("id_user", metod.idUser);
                 
-                metod.status = true;
                 await command.ExecuteNonQueryAsync();
                 formatter.Serialize(stream, metod);
             }
@@ -208,6 +207,60 @@ namespace server_V1
                {
                    sqlConnecton.Close();
                }
+            }
+        }
+        public async void DelFromFriend(Methods metod)
+        {
+            sqlConnecton = new SqlConnection(connectionString);
+            await sqlConnecton.OpenAsync();
+            command = new SqlCommand($"DELETE FROM [Friends] WHERE id_friend = {metod.idFriend} and id_user = {metod.idUser}", sqlConnecton);
+            try
+            {
+                await command.ExecuteNonQueryAsync();
+                formatter.Serialize(stream, metod);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (sqlReader != null)
+                    sqlReader.Close();
+                if (sqlConnecton != null && sqlConnecton.State != System.Data.ConnectionState.Closed)
+                {
+                    sqlConnecton.Close();
+                }
+            }
+        }
+        public async void GetFriendList(Methods metod)
+        {
+            metod.friendsList = new List<List<object>>();
+            sqlConnecton = new SqlConnection(connectionString);
+            await sqlConnecton.OpenAsync();
+            //command = new SqlCommand($"SELECT * FROM [User] where id = (Select id_user FROM [Friends] where id_user = {metod.idUser})", sqlConnecton);
+            command = new SqlCommand($"SELECT * FROM [User] where id = ANY (Select id_friend FROM [Friends] where id_user = {metod.idUser})", sqlConnecton);
+            try
+            {
+                sqlReader = await command.ExecuteReaderAsync();
+                while (await sqlReader.ReadAsync())
+                {
+                    metod.friendsList.Add( new List<object>() { sqlReader["id"].ToString(), sqlReader["login"].ToString(), sqlReader["email"].ToString(), sqlReader["name"].ToString(), sqlReader["surname"].ToString(), sqlReader["phone"].ToString(), sqlReader["dateOfBirth"].ToString(), sqlReader["password"].ToString() });
+                }
+                formatter.Serialize(stream, metod);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (sqlReader != null)
+                    sqlReader.Close();
+                if (sqlConnecton != null && sqlConnecton.State != System.Data.ConnectionState.Closed)
+                {
+                    sqlConnecton.Close();
+                }
             }
         }
 
@@ -226,6 +279,10 @@ namespace server_V1
                         GetUsersList(method);
                     if (method.com == Command.AddToFriend)
                         AddToFriend(method);
+                    if (method.com == Command.DelFromFriend)
+                        DelFromFriend(method);
+                    if (method.com == Command.GetFriendList)
+                        GetFriendList(method);
 
 
 

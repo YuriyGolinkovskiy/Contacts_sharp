@@ -12,6 +12,7 @@ namespace Serialization
     {
         public List<List<object>> list { get; set; }
         public List<object> userData { get; set; }
+        public List<List<object>> friendsList { get; set; }
         public string login { get; set; }
         public string password { get; set; }
         public string email { get; set; }
@@ -55,6 +56,15 @@ namespace Serialization
         {
             this.idUser = idUser;
             this.idFriend = idFriend;
+        }
+        public void DelFromFriend(int idUser, int idFriend)
+        {
+            this.idUser = idUser;
+            this.idFriend = idFriend;
+        }
+        public List<List<object>> GetFriends()
+        {
+            return friendsList;
         }
     }
 }
