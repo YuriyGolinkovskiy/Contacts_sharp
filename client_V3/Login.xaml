@@ -5,24 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:client_V3"
         mc:Ignorable="d"
-        Title="Login" Height="300" Width="300">
-    <Grid Margin="0,0,-0.4,1">
-        <Grid x:Name="grid1"  HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top" Grid.RowSpan="7" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+        Title="Login" Height="319" Width="380"  Background="#84c582">
+    <Border Background="#2e3337" CornerRadius="20" Margin="20">
+        <StackPanel Margin="20">
 
-            </Grid.RowDefinitions>
-            <Label Content="Email or login:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="loginTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0"  VerticalAlignment="Center" Width="120"/>
-            <Label Content="Password:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="passwordTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1"  VerticalAlignment="Center" Width="120"/>
-
-        </Grid>
-        <Button x:Name="login" Content="Login" HorizontalAlignment="Left" Height="35" Margin="105,115,0,0" VerticalAlignment="Top" Width="80" Click="login_Click"/>
-    </Grid>
+            <Label FontSize="15" Content="Login" Foreground="White" HorizontalAlignment="Center"></Label>
+            <Separator></Separator>
+            <Label Content="Email or Login"  Foreground="White"></Label>
+            <TextBox x:Name="loginTextBox" Background="#545d6a" Foreground="White" FontSize="15"/>
+            <Label Content="Password" Foreground="White"/>
+            <TextBox x:Name="passwordTextBox" Background="#545d6a" Foreground="White" FontSize="15"/>
+            <Button x:Name="login" Content="Login" Background="#545d6a" Foreground="White" FontSize="15" Margin="60 10" Click="login_Click"></Button>
+        </StackPanel>
+    </Border>
 </Window>

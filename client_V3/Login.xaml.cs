@@ -34,12 +34,13 @@ namespace client_V3
         {
             InitializeComponent();
         }
-      
+
         private void login_Click(object sender, RoutedEventArgs e)
         {
-            if(loginTextBox.Text != string.Empty)
+  
+            if (loginTextBox.Text != string.Empty)
             {
-                if(passwordTextBox.Text != string.Empty)
+                if (passwordTextBox.Text != string.Empty)
                 {
                     Methods au = new Methods(Command.Authorization);
                     au.Auth(loginTextBox.Text, passwordTextBox.Text);
@@ -67,8 +68,6 @@ namespace client_V3
             {
                 MessageBox.Show("Вы не ввели логин");
             }
-            
         }
-
     }
 }

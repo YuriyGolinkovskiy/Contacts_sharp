@@ -180,6 +180,37 @@ namespace server_V1
                }
             }
         }
+        public async void AddToFriend(Methods metod)
+        {
+            metod.status = false;
+            sqlConnecton = new SqlConnection(connectionString);
+            await sqlConnecton.OpenAsync();
+            command = new SqlCommand("INSERT INTO [Friends] (id_friend, id_user)VALUES(@id_friend, @id_user)", sqlConnecton);
+            try
+            {
+               
+                command.Parameters.AddWithValue("id_friend", metod.idFriend);
+                command.Parameters.AddWithValue("id_user", metod.idUser);
+                
+                metod.status = true;
+                await command.ExecuteNonQueryAsync();
+                formatter.Serialize(stream, metod);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+               if (sqlReader != null)
+                   sqlReader.Close();
+               if (sqlConnecton != null && sqlConnecton.State != System.Data.ConnectionState.Closed)
+               {
+                   sqlConnecton.Close();
+               }
+            }
+        }
+
         public void Process()
         {
             try
@@ -193,6 +224,8 @@ namespace server_V1
                         Registration(method);
                     if (method.com == Command.GetUsersList)
                         GetUsersList(method);
+                    if (method.com == Command.AddToFriend)
+                        AddToFriend(method);
 
 
 

@@ -11,6 +11,7 @@ namespace Serialization
         Authorization,
         Registration,
         GetUsersList,
+        AddToFriend,
         SendMessage,
         LoadImage,
     }

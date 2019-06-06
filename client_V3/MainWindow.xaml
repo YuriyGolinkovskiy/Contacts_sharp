@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:client_V3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded" Closed="Window_Closed">
-    <Grid>
-        <Button x:Name="register" Content="Register" HorizontalAlignment="Left" Height="50" Margin="85,55,0,0" VerticalAlignment="Top" Width="150" Click="register_Click"/>
-        <Button x:Name="login" Content="Login" HorizontalAlignment="Left" Height="50" Margin="295,55,0,0" VerticalAlignment="Top" Width="180" Click="login_Click"/>
-    </Grid>
+        Title="MainWindow" Height="319" Width="380"  Background="#84c582" Loaded="Window_Loaded" Closed="Window_Closed">
+    <Border Background="#2e3337" CornerRadius="20" Margin="20">
+        <StackPanel Margin="20">
+
+            <Label FontSize="15" Content="Input" Foreground="White" HorizontalAlignment="Center"></Label>
+            <Separator></Separator>
+            <Button x:Name="register" Content="Register" Background="#545d6a" Foreground="White" FontSize="15" Margin="10" Click="register_Click"/>
+            <Button x:Name="login" Content="Login" Background="#545d6a" Foreground="White" FontSize="15" Margin="10" Click="login_Click"/>
+
+        </StackPanel>
+    </Border>
 </Window>

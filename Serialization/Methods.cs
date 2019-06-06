@@ -19,6 +19,8 @@ namespace Serialization
         public string surname { get; set; }
         public string phone { get; set; }
         public string dateOfBirth { get; set; }
+        public int idUser { get; set; }
+        public int idFriend { get; set; }
         public bool status { get; set; }
         public Command com { get; set; }
         public Methods (Command com)
@@ -48,6 +50,11 @@ namespace Serialization
         public List<object> UserData()
         {
             return userData;
+        }
+        public void AddToFriend(int idUser, int idFriend)
+        {
+            this.idUser = idUser;
+            this.idFriend = idFriend;
         }
     }
 }
